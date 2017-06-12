@@ -17,17 +17,19 @@
    	 jameswu62@yahoo.co.nz
 
 
+
+
 /* The following are Origional comments */
 
-                           Reusable MSP430 printf()
+  Reusable MSP430 printf()
  
   Description: This printf function was written by oPossum and originally
                posted on the 43oh.com forums. For more information on this
                code, please see the link below.
  
-               http://www.43oh.com/forum/viewtopic.php?f=10&t=1732
+  http://www.43oh.com/forum/viewtopic.php?f=10&t=1732
  
-               A big thanks to oPossum for sharing such great code!
+  A big thanks to oPossum for sharing such great code!
  
   Author:  oPossum
   Source:  http://www.43oh.com/forum/viewtopic.php?f=10&t=1732
