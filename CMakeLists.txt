@@ -12,18 +12,19 @@ set(CMAKE_CXX_STANDARD 17)
 #####################
 
 # Project variables
-set(LOCAL_PROJECT_NAME        "#{ProjectName}")
+set(LOCAL_PROJECT_NAME        "tiny_printf")
 set(LOCAL_PROJECT_VERSION     "0.0.1")
 set(LOCAL_PROJECT_DESCRIPTION "Description")
 
 # Header files (relative to "include" directory)
 set(HEADERS
-    header.h
+    tiny_printf.h
 )
 
 # Source files (relative to "src" directory)
 set(SOURCES
     main.cpp
+    tiny_printf.c
 )
 
 # Compiler definitions
