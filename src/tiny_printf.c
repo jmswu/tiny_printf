@@ -7,6 +7,9 @@
 
 #include "tiny_printf.h"
 
+static void xtoa(unsigned long x, const unsigned long *dp);
+static void puth(unsigned n);
+
 static const unsigned long dv[] = {
 //  4294967296      // 32 bit unsigned max
 		1000000000,// +0
@@ -46,7 +49,7 @@ static void puth(unsigned n) {
 	putc(hex[n & 15]);
 }
 
-void tiny_printf(char *format, ...)
+void tiny_printf(const char *format, ...)
 {
 	char c;
 	int i;

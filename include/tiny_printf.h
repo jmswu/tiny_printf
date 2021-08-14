@@ -40,16 +40,16 @@
  *       for use on NJC's MSP430 LaunchPad Blog.
  ******************************************************************************/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "stdarg.h"
 
-void putc(unsigned);
-void puts(char *);
+void tiny_printf(const char *format, ...);
 
-static void xtoa(unsigned long x, const unsigned long *dp);
-static void puth(unsigned n);
-void tiny_printf(char *format, ...);
-
-
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* SRC_TINY_PRINTF_H_ */
