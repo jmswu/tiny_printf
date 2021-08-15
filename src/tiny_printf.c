@@ -8,8 +8,8 @@
 #include "tiny_printf.h"
 
 static void xtoa(unsigned long x, const unsigned long *dp);
-static void tiny_puthex(unsigned n);
-static void tiny_puts(const char * str);
+static void tiny_putHex(unsigned n);
+static void tiny_putStr(const char * str);
 
 static const unsigned long dv[] = {
 //  4294967296      // 32 bit unsigned max
@@ -44,12 +44,12 @@ static void xtoa(unsigned long x, const unsigned long *dp) {
 		tiny_putc('0');
 }
 
-static void tiny_puthex(unsigned n) {
+static void tiny_putHex(unsigned n) {
 	static const char hex[16] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	tiny_putc(hex[n & 15]);
 }
 
-static void tiny_puts(const char * str)
+static void tiny_putStr(const char * str)
 {
 	while(*str)
 	{
@@ -70,7 +70,7 @@ void tiny_printf(const char *format, ...)
 		if(c == '%') {
 			switch(c = *format++) {
 				case 's': // String
-					tiny_puts(va_arg(a, char*));
+					tiny_putStr(va_arg(a, char*));
 					break;
 				case 'c':// Char
 					tiny_putc((char)va_arg(a, int));
@@ -89,10 +89,10 @@ void tiny_printf(const char *format, ...)
 				break;
 				case 'x':// 16 bit heXadecimal
 					i = va_arg(a, int);
-					tiny_puthex(i >> 12);
-					tiny_puthex(i >> 8);
-					tiny_puthex(i >> 4);
-					tiny_puthex(i);
+					tiny_putHex(i >> 12);
+					tiny_putHex(i >> 8);
+					tiny_putHex(i >> 4);
+					tiny_putHex(i);
 				break;
 				case 0: return;
 				default: goto bad_fmt;
