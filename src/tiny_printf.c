@@ -60,15 +60,15 @@ static void tiny_putStr(const char * str)
 
 void tiny_printf(const char *format, ...)
 {
-	char c;
+	char formatChar;
 	int i;
 	long n;
 
 	va_list a;
 	va_start(a, format);
-	while(c = *format++) {
-		if(c == '%') {
-			switch(c = *format++) {
+	while(formatChar = *format++) {
+		if(formatChar == '%') {
+			switch(formatChar = *format++) {
 				case 's': // String
 					tiny_putStr(va_arg(a, char*));
 					break;
@@ -78,13 +78,13 @@ void tiny_printf(const char *format, ...)
 				case 'i':// 16 bit Integer
 				case 'u':// 16 bit Unsigned
 					i = va_arg(a, int);
-					if(c == 'i' && i < 0) i = -i, tiny_putc('-');
+					if(formatChar == 'i' && i < 0) i = -i, tiny_putc('-');
 					xtoa((unsigned)i, dv + 5);
 					break;
 				case 'l':// 32 bit Long
 				case 'n':// 32 bit uNsigned loNg
 					n = va_arg(a, long);
-					if(c == 'l' && n < 0) n = -n, tiny_putc('-');
+					if(formatChar == 'l' && n < 0) n = -n, tiny_putc('-');
 					xtoa((unsigned long)n, dv);
 					break;
 				case 'x':// 16 bit heXadecimal
@@ -98,7 +98,7 @@ void tiny_printf(const char *format, ...)
 				default: goto bad_fmt;
 			}
 		} else
-			bad_fmt: tiny_putc(c);
+			bad_fmt: tiny_putc(formatChar);
 	}
 	va_end(a);
 }
