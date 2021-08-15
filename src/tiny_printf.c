@@ -52,7 +52,7 @@ static void tiny_puthex(unsigned n) {
 static void tiny_puts(const char * str)
 {
 	char c = *str;
-	while(c != 0)
+	while(c)
 	{
 		tiny_putc(c);
 		str++;
