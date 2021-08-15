@@ -74,26 +74,26 @@ void tiny_printf(const char *format, ...)
 					break;
 				case 'c':// Char
 					tiny_putc((char)va_arg(a, int));
-				break;
+					break;
 				case 'i':// 16 bit Integer
 				case 'u':// 16 bit Unsigned
 					i = va_arg(a, int);
 					if(c == 'i' && i < 0) i = -i, tiny_putc('-');
 					xtoa((unsigned)i, dv + 5);
-				break;
+					break;
 				case 'l':// 32 bit Long
 				case 'n':// 32 bit uNsigned loNg
 					n = va_arg(a, long);
 					if(c == 'l' && n < 0) n = -n, tiny_putc('-');
 					xtoa((unsigned long)n, dv);
-				break;
+					break;
 				case 'x':// 16 bit heXadecimal
 					i = va_arg(a, int);
 					tiny_putHex(i >> 12);
 					tiny_putHex(i >> 8);
 					tiny_putHex(i >> 4);
 					tiny_putHex(i);
-				break;
+					break;
 				case 0: return;
 				default: goto bad_fmt;
 			}
