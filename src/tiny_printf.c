@@ -77,7 +77,7 @@ void tiny_printf(const char *format, ...)
 					tiny_puts(va_arg(a, char*));
 					break;
 				case 'c':// Char
-					tiny_putc(va_arg(a, char));
+					tiny_putc((char)va_arg(a, int));
 				break;
 				case 'i':// 16 bit Integer
 				case 'u':// 16 bit Unsigned
