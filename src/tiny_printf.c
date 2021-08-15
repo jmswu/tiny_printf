@@ -61,7 +61,7 @@ static void tiny_putStr(const char * str)
 void tiny_printf(const char *format, ...)
 {
 	char formatChar;
-	int number;
+	int num16bit;
 	long num32bit;
 
 	va_list a;
@@ -77,9 +77,9 @@ void tiny_printf(const char *format, ...)
 					break;
 				case 'i':// 16 bit Integer
 				case 'u':// 16 bit Unsigned
-					number = va_arg(a, int);
-					if(formatChar == 'i' && number < 0) number = -number, tiny_putc('-');
-					xtoa((unsigned)number, dv + 5);
+					num16bit = va_arg(a, int);
+					if(formatChar == 'i' && num16bit < 0) num16bit = -num16bit, tiny_putc('-');
+					xtoa((unsigned)num16bit, dv + 5);
 					break;
 				case 'l':// 32 bit Long
 				case 'n':// 32 bit uNsigned loNg
@@ -88,11 +88,11 @@ void tiny_printf(const char *format, ...)
 					xtoa((unsigned long)num32bit, dv);
 					break;
 				case 'x':// 16 bit heXadecimal
-					number = va_arg(a, int);
-					tiny_putHex(number >> 12);
-					tiny_putHex(number >> 8);
-					tiny_putHex(number >> 4);
-					tiny_putHex(number);
+					num16bit = va_arg(a, int);
+					tiny_putHex(num16bit >> 12);
+					tiny_putHex(num16bit >> 8);
+					tiny_putHex(num16bit >> 4);
+					tiny_putHex(num16bit);
 					break;
 				case 0: return;
 				default: goto bad_fmt;
