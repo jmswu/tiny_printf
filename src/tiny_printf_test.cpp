@@ -196,9 +196,9 @@ namespace
         ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }  
 
-    TEST_F(TinyPrintfTest, test_print_16bit_int_loop_minus)
+    TEST_F(TinyPrintfTest, test_print_16bit_int_loop_full_range)
     {
-        for(int i = -32768; i < 0; i++)
+        for(int i = -32768; i <= 32767; i++)
         {
             printBuff.clear();
             tiny_printf("%i", i);
