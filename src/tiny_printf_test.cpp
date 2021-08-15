@@ -96,4 +96,18 @@ namespace
             ASSERT_EQ(printBuff.get(i++), 0);
         }
     }
+
+    TEST_F(TinyPrintfTest, test_print_char_loop_all_chars_with_string_at_the_front)
+    {
+        for(uint8_t c = 0; c <= 127; c++)
+        {
+            printBuff.clear();
+            tiny_printf("%chi", (char)c);
+            size_t i = 0;
+            ASSERT_EQ(printBuff.get(i++), (char)c);
+            ASSERT_EQ(printBuff.get(i++), 'h');
+            ASSERT_EQ(printBuff.get(i++), 'i');
+            ASSERT_EQ(printBuff.get(i++), 0);
+        }
+    }
 }
