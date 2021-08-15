@@ -67,14 +67,33 @@ namespace
         ASSERT_EQ(printBuff.get(1), 0);
     }
 
-    TEST_F(TinyPrintfTest, test_print_char_loop_lower_case)
+    TEST_F(TinyPrintfTest, test_print_char_loop_all_chars)
     {
-        for(char c = 0; c <= 127; c++)
+        for(uint8_t c = 0; c <= 127; c++)
         {
             printBuff.clear();
-            tiny_printf("%c", c);
-            ASSERT_EQ(printBuff.get(0), c);
+            tiny_printf("%c", (char)c);
+            ASSERT_EQ(printBuff.get(0), (char)c);
             ASSERT_EQ(printBuff.get(1), 0);
+        }
+    }
+
+
+    TEST_F(TinyPrintfTest, test_print_char_loop_all_chars_with_string_at_the_front)
+    {
+        for(uint8_t c = 0; c <= 127; c++)
+        {
+            printBuff.clear();
+            tiny_printf("hello %c", (char)c);
+            size_t i = 0;
+            ASSERT_EQ(printBuff.get(i++), 'h');
+            ASSERT_EQ(printBuff.get(i++), 'e');
+            ASSERT_EQ(printBuff.get(i++), 'l');
+            ASSERT_EQ(printBuff.get(i++), 'l');
+            ASSERT_EQ(printBuff.get(i++), 'o');
+            ASSERT_EQ(printBuff.get(i++), ' ');
+            ASSERT_EQ(printBuff.get(i++), (char)c);
+            ASSERT_EQ(printBuff.get(i++), 0);
         }
     }
 }
