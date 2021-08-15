@@ -190,8 +190,9 @@ namespace
     TEST_F(TinyPrintfTest, test_print_16bit_int)
     {
         printBuff.clear();
-        tiny_printf("%i", 0);
-        ASSERT_EQ(printBuff.get(0), '0');
+        tiny_printf("%i", -1);
+        ASSERT_EQ(printBuff.get(0), '-');
+        ASSERT_EQ(printBuff.get(1), '1');
         ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }  
 }
