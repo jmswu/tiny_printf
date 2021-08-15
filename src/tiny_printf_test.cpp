@@ -17,7 +17,7 @@ class PrintBuff
             array.at(index++) = oneChar;
         }
 
-        auto get(const int index)
+        auto get(const size_t index)
         {
             return array.at(index);
         }
@@ -25,6 +25,7 @@ class PrintBuff
         void clear()
         {
             array.fill(0);
+            index = 0;
         }
 
     private:
@@ -49,14 +50,8 @@ namespace
         protected:
             TinyPrintfTest(){}
             virtual ~TinyPrintfTest(){}
-            virtual void SetUp()
-            {
-
-            }
-            virtual void TearDown()
-            {
-
-            }
+            virtual void SetUp(){}
+            virtual void TearDown(){}
     };
 
     TEST_F(TinyPrintfTest, test_1)
@@ -74,12 +69,11 @@ namespace
 
     TEST_F(TinyPrintfTest, test_print_char_loop_lower_case)
     {
-        printBuff.clear();
-        for(char i = 'a'; i <= 'z'; i++)
+        for(char c = 'a'; c <= 'z'; c++)
         {
             printBuff.clear();
-            tiny_printf("%c", i);
-            ASSERT_EQ(printBuff.get(0), i);
+            tiny_printf("%c", c);
+            ASSERT_EQ(printBuff.get(0), c);
             ASSERT_EQ(printBuff.get(1), 0);
         }
     }
