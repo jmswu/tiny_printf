@@ -13,6 +13,7 @@ int main(int argc, char ** argv)
 
 
     tiny_printf("Hello world from tiny_printf()\n");
+    tiny_printf("printing string: [%s]\n", "test string");
     return 0;
 }
 
