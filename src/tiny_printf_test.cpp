@@ -173,4 +173,13 @@ namespace
         tiny_printf("%s back", pData);
         ASSERT_EQ(0, memcmp(pDataExptected, printBuff.getData(), printBuff.getLen()));
     }    
+
+    TEST_F(TinyPrintfTest, test_print_string_with_string_at_front_and_back)
+    {
+        printBuff.clear();
+        const char *pData = "Hello!";
+        const char *pDataExptected = "front Hello! back";
+        tiny_printf("front %s back", pData);
+        ASSERT_EQ(0, memcmp(pDataExptected, printBuff.getData(), printBuff.getLen()));
+    }    
 }
