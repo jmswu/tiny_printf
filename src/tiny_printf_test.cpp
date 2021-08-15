@@ -195,4 +195,17 @@ namespace
         ASSERT_EQ(printBuff.get(1), '1');
         ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }  
+
+    TEST_F(TinyPrintfTest, test_print_16bit_int_loop_minus)
+    {
+        for(int i = -32768; i < 0; i++)
+        {
+            printBuff.clear();
+            tiny_printf("%i", i);
+            char buff[64];
+            sprintf(buff,"%d", i);
+            ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
+        }
+    }  
 }
