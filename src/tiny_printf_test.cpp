@@ -69,7 +69,7 @@ namespace
 
     TEST_F(TinyPrintfTest, test_print_char_loop_lower_case)
     {
-        for(char c = 'a'; c <= 'z'; c++)
+        for(char c = 0; c <= 127; c++)
         {
             printBuff.clear();
             tiny_printf("%c", c);
