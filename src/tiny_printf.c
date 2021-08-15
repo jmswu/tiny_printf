@@ -62,7 +62,7 @@ void tiny_printf(const char *format, ...)
 {
 	char formatChar;
 	int number;
-	long n;
+	long num32bit;
 
 	va_list a;
 	va_start(a, format);
@@ -83,9 +83,9 @@ void tiny_printf(const char *format, ...)
 					break;
 				case 'l':// 32 bit Long
 				case 'n':// 32 bit uNsigned loNg
-					n = va_arg(a, long);
-					if(formatChar == 'l' && n < 0) n = -n, tiny_putc('-');
-					xtoa((unsigned long)n, dv);
+					num32bit = va_arg(a, long);
+					if(formatChar == 'l' && num32bit < 0) num32bit = -num32bit, tiny_putc('-');
+					xtoa((unsigned long)num32bit, dv);
 					break;
 				case 'x':// 16 bit heXadecimal
 					number = va_arg(a, int);
