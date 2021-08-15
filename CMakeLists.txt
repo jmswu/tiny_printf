@@ -1,62 +1,19 @@
-####################
-#      Global      #
-####################
-
 cmake_minimum_required(VERSION 3.12)
+project(tiny_printf)
 set(CMAKE_CXX_STANDARD 17)
+set(SRC_FOLDER src)
 
 
-
-#####################
-#      Project      #
-#####################
-
-# Project variables
-set(LOCAL_PROJECT_NAME        "tiny_printf")
-set(LOCAL_PROJECT_VERSION     "0.0.1")
-set(LOCAL_PROJECT_DESCRIPTION "Description")
-
-# Header files (relative to "include" directory)
-set(HEADERS
-    tiny_printf.h
-)
-
-# Source files (relative to "src" directory)
-set(SOURCES
-    main.cpp
-    tiny_printf.c
-)
-
-# Compiler definitions
-set(DEFINES
-
-)
-
-# Compiler options
-set(OPTIONS
-
-)
-
-# Project setup
-project(${LOCAL_PROJECT_NAME}
-        VERSION ${LOCAL_PROJECT_VERSION}
-        DESCRIPTION ${LOCAL_PROJECT_DESCRIPTION}
-        LANGUAGES CXX)
-
-add_executable(${LOCAL_PROJECT_NAME})
-
-list(TRANSFORM HEADERS PREPEND "include/")
-list(TRANSFORM SOURCES PREPEND "src/")
-
-target_include_directories(${LOCAL_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_sources(${LOCAL_PROJECT_NAME} PRIVATE ${SOURCES} ${HEADERS})
-target_compile_definitions(${LOCAL_PROJECT_NAME} PRIVATE ${DEFINES})
-target_compile_options(${LOCAL_PROJECT_NAME} PRIVATE ${OPTIONS})
-
-set_target_properties(${LOCAL_PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "bin")
+file(GLOB_RECURSE SRC_CXX_FILES CMAKE_CONFIGURE_DEPENDS ${SRC_FOLDER}/*.cpp)
+file(GLOB_RECURSE SRC_C_FILES CMAKE_CONFIGURE_DEPENDS ${SRC_FOLDER}/*.c)
+#add_subdirectory(googletest)
+add_executable(${PROJECT_NAME} ${SRC_CXX_FILES} ${SRC_C_FILES})
+#target_link_libraries(${PROJECT_NAME} pthread gtest gtest_main)
 
 
-
-####################
-#   Dependencies   #
-####################
+#set(GCC_X_COVERAGE_COMPILE_FLAGS "-Werror -Wall -Wextra -Wpointer-arith -Wcast-align -Wwrite-strings -Wswitch-default -Wunreachable-code -Winit-self -Wmissing-field-initializers -Wno-unknown-pragmas -Wstrict-prototypes -Wundef -Wold-style-definition -Wno-misleading-indentation")
+set(GCC_X_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Wpointer-arith -Wcast-align -Wwrite-strings -Wswitch-default -Wunreachable-code -Winit-self -Wmissing-field-initializers -Wno-unknown-pragmas -Wstrict-prototypes -Wundef -Wold-style-definition -Wno-misleading-indentation")
+#set(GCC_CXX_COVERAGE_COMPILE_FLAGS "-Werror -Wall -Wextra -Wpointer-arith -Wcast-align -Wwrite-strings -Wswitch-default -Wunreachable-code -Winit-self -Wmissing-field-initializers -Wno-unknown-pragmas -Wundef -Wno-misleading-indentation")
+set(GCC_CXX_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Wpointer-arith -Wcast-align -Wwrite-strings -Wswitch-default -Wunreachable-code -Winit-self -Wmissing-field-initializers -Wno-unknown-pragmas -Wundef -Wno-misleading-indentation")
+set(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS} ${GCC_X_COVERAGE_COMPILE_FLAGS})
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${GCC_CXX_COVERAGE_COMPILE_FLAGS})

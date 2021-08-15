@@ -9,6 +9,7 @@
 
 static void xtoa(unsigned long x, const unsigned long *dp);
 static void puth(unsigned n);
+static void tiny_puts(const char * str);
 
 static const unsigned long dv[] = {
 //  4294967296      // 32 bit unsigned max
@@ -37,16 +38,27 @@ static void xtoa(unsigned long x, const unsigned long *dp) {
 			c = '0';
 			while (x >= d)
 				++c, x -= d;
-			putc(c);
+			tiny_putc(c);
 		} while (!(d & 1));
 	} else
-		putc('0');
+		tiny_putc('0');
 }
 
 static void puth(unsigned n) {
 	static const char hex[16] = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
 			'9', 'A', 'B', 'C', 'D', 'E', 'F' };
-	putc(hex[n & 15]);
+	tiny_putc(hex[n & 15]);
+}
+
+static void tiny_puts(const char * str)
+{
+	char c = *str;
+	while(c != 0)
+	{
+		tiny_putc(c);
+		str++;
+		c = *str;
+	}
 }
 
 void tiny_printf(const char *format, ...)
@@ -61,21 +73,21 @@ void tiny_printf(const char *format, ...)
 		if(c == '%') {
 			switch(c = *format++) {
 				case 's': // String
-					puts(va_arg(a, char*));
+					tiny_puts(va_arg(a, char*));
 					break;
 				case 'c':// Char
-					putc(va_arg(a, char));
+					tiny_putc(va_arg(a, char));
 				break;
 				case 'i':// 16 bit Integer
 				case 'u':// 16 bit Unsigned
 					i = va_arg(a, int);
-					if(c == 'i' && i < 0) i = -i, putc('-');
+					if(c == 'i' && i < 0) i = -i, tiny_putc('-');
 					xtoa((unsigned)i, dv + 5);
 				break;
 				case 'l':// 32 bit Long
 				case 'n':// 32 bit uNsigned loNg
 					n = va_arg(a, long);
-					if(c == 'l' && n < 0) n = -n, putc('-');
+					if(c == 'l' && n < 0) n = -n, tiny_putc('-');
 					xtoa((unsigned long)n, dv);
 				break;
 				case 'x':// 16 bit heXadecimal
@@ -89,7 +101,7 @@ void tiny_printf(const char *format, ...)
 				default: goto bad_fmt;
 			}
 		} else
-			bad_fmt: putc(c);
+			bad_fmt: tiny_putc(c);
 	}
 	va_end(a);
 }
