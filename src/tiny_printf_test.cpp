@@ -85,7 +85,7 @@ namespace
         printBuff.clear();
         tiny_printf("%c", 'c');
         ASSERT_EQ(printBuff.get(0), 'c');
-        ASSERT_EQ(printBuff.get(1), 0);
+        ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }
 
     TEST_F(TinyPrintfTest, test_print_char_loop_all_chars)
@@ -95,7 +95,7 @@ namespace
             printBuff.clear();
             tiny_printf("%c", (char)c);
             ASSERT_EQ(printBuff.get(0), (char)c);
-            ASSERT_EQ(printBuff.get(1), 0);
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     }
 
@@ -114,7 +114,7 @@ namespace
             ASSERT_EQ(printBuff.get(i++), 'o');
             ASSERT_EQ(printBuff.get(i++), ' ');
             ASSERT_EQ(printBuff.get(i++), (char)c);
-            ASSERT_EQ(printBuff.get(i++), 0);
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     }
 
@@ -128,7 +128,7 @@ namespace
             ASSERT_EQ(printBuff.get(i++), (char)c);
             ASSERT_EQ(printBuff.get(i++), 'h');
             ASSERT_EQ(printBuff.get(i++), 'i');
-            ASSERT_EQ(printBuff.get(i++), 0);
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     }
 
@@ -144,7 +144,7 @@ namespace
             ASSERT_EQ(printBuff.get(i++), (char)c);
             ASSERT_EQ(printBuff.get(i++), 'h');
             ASSERT_EQ(printBuff.get(i++), 'i');
-            ASSERT_EQ(printBuff.get(i++), 0);
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     }
 
@@ -154,6 +154,7 @@ namespace
         const char *pData = "Hello!";
         tiny_printf("%s", pData);
         ASSERT_EQ(0, memcmp(pData, printBuff.getData(), printBuff.getLen()));
+        ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }
 
     TEST_F(TinyPrintfTest, test_print_string_with_string_at_front)
@@ -163,6 +164,7 @@ namespace
         const char *pDataExptected = "front Hello!";
         tiny_printf("front %s", pData);
         ASSERT_EQ(0, memcmp(pDataExptected, printBuff.getData(), printBuff.getLen()));
+        ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }
 
     TEST_F(TinyPrintfTest, test_print_string_with_string_at_back)
@@ -172,6 +174,7 @@ namespace
         const char *pDataExptected = "Hello! back";
         tiny_printf("%s back", pData);
         ASSERT_EQ(0, memcmp(pDataExptected, printBuff.getData(), printBuff.getLen()));
+        ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }    
 
     TEST_F(TinyPrintfTest, test_print_string_with_string_at_front_and_back)
@@ -181,6 +184,7 @@ namespace
         const char *pDataExptected = "front Hello! back";
         tiny_printf("front %s back", pData);
         ASSERT_EQ(0, memcmp(pDataExptected, printBuff.getData(), printBuff.getLen()));
+        ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }    
 
     TEST_F(TinyPrintfTest, test_print_16bit_int)
@@ -188,6 +192,6 @@ namespace
         printBuff.clear();
         tiny_printf("%i", 0);
         ASSERT_EQ(printBuff.get(0), '0');
-        ASSERT_EQ(printBuff.get(1), 0);
+        ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
     }  
 }
