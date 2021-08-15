@@ -182,4 +182,12 @@ namespace
         tiny_printf("front %s back", pData);
         ASSERT_EQ(0, memcmp(pDataExptected, printBuff.getData(), printBuff.getLen()));
     }    
+
+    TEST_F(TinyPrintfTest, test_print_16bit_int)
+    {
+        printBuff.clear();
+        tiny_printf("%i", 0);
+        ASSERT_EQ(printBuff.get(0), '0');
+        ASSERT_EQ(printBuff.get(1), 0);
+    }  
 }
