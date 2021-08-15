@@ -8,7 +8,7 @@ file(GLOB_RECURSE SRC_CXX_FILES CMAKE_CONFIGURE_DEPENDS ${SRC_FOLDER}/*.cpp)
 file(GLOB_RECURSE SRC_C_FILES CMAKE_CONFIGURE_DEPENDS ${SRC_FOLDER}/*.c)
 add_subdirectory(googletest)
 add_executable(${PROJECT_NAME} ${SRC_CXX_FILES} ${SRC_C_FILES})
-target_link_libraries(${PROJECT_NAME} pthread gtest gtest_main)
+target_link_libraries(${PROJECT_NAME} gtest gtest_main)
 
 
 #set(GCC_X_COVERAGE_COMPILE_FLAGS "-Werror -Wall -Wextra -Wpointer-arith -Wcast-align -Wwrite-strings -Wswitch-default -Wunreachable-code -Winit-self -Wmissing-field-initializers -Wno-unknown-pragmas -Wstrict-prototypes -Wundef -Wold-style-definition -Wno-misleading-indentation")
