@@ -22,10 +22,26 @@ class PrintBuff
             return array.at(index);
         }
 
+        auto getData(void)
+        {
+            return array.data();
+        }
+
         void clear()
         {
             array.fill(0);
             index = 0;
+        }
+
+        void print()
+        {
+            std::printf("[");
+            for(auto & elem: array)
+            {
+                std::printf("%c", elem);
+            }
+            std::printf("]");
+            std::printf("\n");
         }
 
     private:
@@ -125,5 +141,13 @@ namespace
             ASSERT_EQ(printBuff.get(i++), 'i');
             ASSERT_EQ(printBuff.get(i++), 0);
         }
+    }
+
+    TEST_F(TinyPrintfTest, test_print_string)
+    {
+        printBuff.clear();
+        const char *pData = "Hello!";
+        tiny_printf("%s", pData);
+        printBuff.print();
     }
 }
