@@ -69,8 +69,7 @@ void tiny_printf(const char *format, ...)
 
 	va_list a;
 	va_start(a, format);
-	c = *format;
-	while(c) {
+	while(c = *format++) {
 		if(c == '%') {
 			switch(c = *format++) {
 				case 's': // String
@@ -103,8 +102,6 @@ void tiny_printf(const char *format, ...)
 			}
 		} else
 			bad_fmt: tiny_putc(c);
-		format++;
-		c = *format;
 	}
 	va_end(a);
 }
