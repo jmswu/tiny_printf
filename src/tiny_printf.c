@@ -8,7 +8,7 @@
 #include "tiny_printf.h"
 
 static void xtoa(unsigned long x, const unsigned long *dp);
-static void puth(unsigned n);
+static void tiny_puthex(unsigned n);
 static void tiny_puts(const char * str);
 
 static const unsigned long dv[] = {
@@ -44,7 +44,7 @@ static void xtoa(unsigned long x, const unsigned long *dp) {
 		tiny_putc('0');
 }
 
-static void puth(unsigned n) {
+static void tiny_puthex(unsigned n) {
 	static const char hex[16] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	tiny_putc(hex[n & 15]);
 }
@@ -91,10 +91,10 @@ void tiny_printf(const char *format, ...)
 				break;
 				case 'x':// 16 bit heXadecimal
 					i = va_arg(a, int);
-					puth(i >> 12);
-					puth(i >> 8);
-					puth(i >> 4);
-					puth(i);
+					tiny_puthex(i >> 12);
+					tiny_puthex(i >> 8);
+					tiny_puthex(i >> 4);
+					tiny_puthex(i);
 				break;
 				case 0: return;
 				default: goto bad_fmt;
