@@ -27,6 +27,11 @@ class PrintBuff
             return array.data();
         }
 
+        auto getLen(void)
+        {
+            return index;
+        }
+
         void clear()
         {
             array.fill(0);
@@ -148,6 +153,6 @@ namespace
         printBuff.clear();
         const char *pData = "Hello!";
         tiny_printf("%s", pData);
-        printBuff.print();
+        ASSERT_EQ(0, memcmp(pData, printBuff.getData(), printBuff.getLen()));
     }
 }
