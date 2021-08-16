@@ -222,18 +222,16 @@ namespace
         }
     }
 
-    TEST_F(TinyPrintfTest, test_print_32bit_int_loop_full_range)
+    TEST_F(TinyPrintfTest, test_print_32bit_int_edge_case)
     {
-        for(int i = -2'147'483'648; i <= 2'147'483'647; i++)
+        const int test_data[] ={-2'147'483'648, -2'147'483'647, -1, 0, 1, 2'147'483'646, 2'147'483'647};
+        const int counts = sizeof(test_data) / sizeof(test_data[0]);
+        for(int i = 0; i < counts; i++)
         {
             printBuff.clear();
-            tiny_printf("%l", i);
+            tiny_printf("%l", test_data[i]);
             char buff[64];
-            sprintf(buff,"%d", i);
-            if (memcmp(buff, printBuff.getData(), strlen(buff)))
-            {
-                std::printf("[buff: %s, tiny: %s]\n", buff, printBuff.getData());
-            }
+            sprintf(buff,"%d", test_data[i]);
             ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
             ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
