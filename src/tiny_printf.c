@@ -7,7 +7,7 @@
 
 #include "tiny_printf.h"
 
-static void xtoa(unsigned long x, const unsigned long *dp);
+static void tiny_xtoa(unsigned long x, const unsigned long *dp);
 static void tiny_putHex(unsigned n);
 static void tiny_putStr(const char * str);
 
@@ -27,7 +27,7 @@ static const unsigned long dv[] = {
 		};
 
 
-static void xtoa(unsigned long x, const unsigned long *dp) {
+static void tiny_xtoa(unsigned long x, const unsigned long *dp) {
 	char c;
 	unsigned long d;
 	if (x) {
@@ -43,7 +43,7 @@ static void xtoa(unsigned long x, const unsigned long *dp) {
 				++c, x -= d;
 			tiny_putc(c);
 		} while (!(d & 1));
-		
+
 	} else
 		tiny_putc('0');
 }
@@ -83,13 +83,13 @@ void tiny_printf(const char *format, ...)
 				case 'u':// 16 bit Unsigned
 					num16bit = va_arg(a, int);
 					if(formatChar == 'i' && num16bit < 0) num16bit = -num16bit, tiny_putc('-');
-					xtoa((unsigned)num16bit, dv + 5);
+					tiny_xtoa((unsigned)num16bit, dv + 5);
 					break;
 				case 'l':// 32 bit Long
 				case 'n':// 32 bit uNsigned loNg
 					num32bit = va_arg(a, long);
 					if(formatChar == 'l' && num32bit < 0) num32bit = -num32bit, tiny_putc('-');
-					xtoa((unsigned long)num32bit, dv);
+					tiny_xtoa((unsigned long)num32bit, dv);
 					break;
 				case 'x':// 16 bit heXadecimal
 					num16bit = va_arg(a, int);
