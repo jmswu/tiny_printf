@@ -236,4 +236,19 @@ namespace
             ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     } 
+
+    TEST_F(TinyPrintfTest, test_print_32bit_unsigned_edge_case)
+    {
+        const unsigned test_data[] ={0, 1, 100, 1'000, 10'000, 100'000, 4'294'967'294, 4'294'967'295};
+        const int counts = sizeof(test_data) / sizeof(test_data[0]);
+        for(int i = 0; i < counts; i++)
+        {
+            printBuff.clear();
+            tiny_printf("%n", test_data[i]);
+            char buff[64];
+            sprintf(buff,"%u", test_data[i]);
+            ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
+        }
+    } 
 }
