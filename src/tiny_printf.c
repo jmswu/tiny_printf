@@ -76,25 +76,25 @@ void tiny_printf(const char *format, ...)
 	while(formatChar = *format++) {
 		if(formatChar == '%') {
 			switch(formatChar = *format++) {
-				case 's': // String
+				case 's': // string
 					tiny_putStr(va_arg(a, char*));
 					break;
-				case 'c':// Char
+				case 'c':// char
 					tiny_putc((char)va_arg(a, int));
 					break;
-				case 'i':// 16 bit Integer
-				case 'u':// 16 bit Unsigned
+				case 'i':// 16 bit integer
+				case 'u':// 16 bit unsigned
 					num16bit = va_arg(a, int);
 					if(formatChar == 'i' && num16bit < 0) num16bit = -num16bit, tiny_putc('-');
 					tiny_xtoa((unsigned)num16bit, dv + 5);
 					break;
-				case 'l':// 32 bit Long
-				case 'n':// 32 bit uNsigned loNg
+				case 'l':// 32 bit long
+				case 'n':// 32 bit unsigned long
 					num32bit = va_arg(a, long);
 					if(formatChar == 'l' && num32bit < 0) num32bit = -num32bit, tiny_putc('-');
 					tiny_xtoa((unsigned long)num32bit, dv);
 					break;
-				case 'x':// 16 bit heXadecimal
+				case 'x':// 16 bit hex
 					num16bit = va_arg(a, int);
 					tiny_putHex(num16bit >> 12);
 					tiny_putHex(num16bit >> 8);
