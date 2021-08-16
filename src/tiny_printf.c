@@ -44,8 +44,11 @@ static void tiny_xtoa(unsigned long x, const unsigned long *dp) {
 			tiny_putc(c);
 		} while (!(d & 1));
 
-	} else
+	} 
+	else
+	{
 		tiny_putc('0');
+	}
 }
 
 static void tiny_putHex(unsigned n) {
