@@ -208,4 +208,17 @@ namespace
             ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     }  
+
+    TEST_F(TinyPrintfTest, test_print_unsigned)
+    {
+        for(unsigned i = 0; i < 65536; i++)
+        {
+            printBuff.clear();
+            tiny_printf("%u", i);
+            char buff[64];
+            sprintf(buff,"%d", i);
+            ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
+        }
+    }
 }
