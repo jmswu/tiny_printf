@@ -221,4 +221,21 @@ namespace
             ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     }
+
+    TEST_F(TinyPrintfTest, test_print_32bit_int_loop_full_range)
+    {
+        for(int i = -2'147'483'648; i <= 2'147'483'647; i++)
+        {
+            printBuff.clear();
+            tiny_printf("%l", i);
+            char buff[64];
+            sprintf(buff,"%d", i);
+            if (memcmp(buff, printBuff.getData(), strlen(buff)))
+            {
+                std::printf("[buff: %s, tiny: %s]\n", buff, printBuff.getData());
+            }
+            ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
+        }
+    } 
 }
