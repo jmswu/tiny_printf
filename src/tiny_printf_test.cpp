@@ -216,7 +216,7 @@ namespace
             printBuff.clear();
             tiny_printf("%u", i);
             char buff[64];
-            sprintf(buff,"%d", i);
+            sprintf(buff,"%u", i);
             ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
             ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
