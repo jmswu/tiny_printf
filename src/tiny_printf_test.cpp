@@ -251,4 +251,17 @@ namespace
             ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
         }
     } 
+
+    TEST_F(TinyPrintfTest, test_print_16bit_hex)
+    {
+        for(int i = 0; i < 65536; i++)
+        {
+            printBuff.clear();
+            tiny_printf("%x", i);
+            char buff[64];
+            sprintf(buff,"%04X", i);
+            ASSERT_EQ(0, memcmp(buff, printBuff.getData(), strlen(buff)));
+            ASSERT_EQ(0, printBuff.get(printBuff.getLen()));
+        }
+    } 
 }
