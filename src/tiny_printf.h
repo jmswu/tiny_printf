@@ -2,7 +2,7 @@
  * tiny_printf.h
  *
  *  Created on: 2/06/2017
- *      Author: james
+ *      Author: James Wu
  */
 
 #ifndef SRC_TINY_PRINTF_H_
