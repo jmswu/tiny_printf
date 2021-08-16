@@ -12,8 +12,8 @@ static void tiny_putHex(unsigned n);
 static void tiny_putStr(const char * str);
 
 static const unsigned long dv[] = {
-//  4294967296      // 32 bit unsigned max
-		1000000000,// +0
+//  4294967296       // 32 bit unsigned max
+		1000000000, // +0
 		100000000, // +1
 		10000000, // +2
 		1000000, // +3
