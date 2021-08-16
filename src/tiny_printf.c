@@ -31,15 +31,19 @@ static void xtoa(unsigned long x, const unsigned long *dp) {
 	char c;
 	unsigned long d;
 	if (x) {
+
 		while (x < *dp)
 			++dp;
-		do {
+
+		do 
+		{
 			d = *dp++;
 			c = '0';
 			while (x >= d)
 				++c, x -= d;
 			tiny_putc(c);
 		} while (!(d & 1));
+		
 	} else
 		tiny_putc('0');
 }
