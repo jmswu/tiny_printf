@@ -5,8 +5,8 @@ The codes id taken from here: http://www.msp430launchpad.com/2012/06/using-print
 only support: 
 * %c - char 
 * %s - char array 
-* %i - integer 
-* %u - unsigned int 
+* %i - integer, 16 bit
+* %u - unsigned int, 16 bit
 * %l - long 
 * %n - unsigned long
 * %x - 16 bits hex
