@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-#include "stdarg.h"
+#include <stdarg.h>
 
 void tiny_putc(const char c);
 void tiny_printf(const char *format, ...);
